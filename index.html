@@ -30,8 +30,16 @@
             headers: { "Content-Type": "application/json" }
             });
             const json = await response.json();
-            const label = json['data'][0]['confidences'][0]['label'];
-            results.innerHTML = `<br/><img src="${reader.result}" width="300"> <p>${label}</p>`
+            const trueLabel = json['data'][0]['label'];
+            const label1 = json['data'][0]['confidences'][0]['label'];
+            const confidence1 = json['data'][0]['confidences'][0]['confidence'];
+            const label2 = json['data'][0]['confidences'][1]['label'];
+            const confidence2 = json['data'][0]['confidences'][1]['confidence'];
+            results.innerHTML = `<br/><img src="${reader.result}" width="300"> 
+            <p>This is a ${trueLabel}</p>
+            <p>Confidence of ${label1}: ${confidence1}</p>
+            <p>Confidence of ${label2}: ${confidence2}</p>`
+        
         }
         function read() {
             const reader = new FileReader();
